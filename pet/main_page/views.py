@@ -21,14 +21,14 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(available=True)
     categories = Category.objects.all()
 
-    paginator = Paginator(products, 1)
+    paginator = Paginator(products, 10)
 
     current_page = paginator.page(int(page))
     
     if category_slug:
         category = get_object_or_404(Category,
                                      slug=category_slug)
-        paginator = Paginator(products.filter(category=category), 1)
+        paginator = Paginator(products.filter(category=category), 10)
         
         current_page = paginator.page(int(page))
     
