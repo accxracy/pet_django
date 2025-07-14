@@ -8,7 +8,7 @@
 
 
 {% block content %}
-    <div class="detail-product">
+    <div class="detail-product d-flex">
         <div class="detail-img">
             <img src="{% if product.image %}{{ product.image.url }}{% endif %}" alt="" class="detail-img">
         </div>
@@ -17,14 +17,14 @@
                 <h3>Category: {{ product.category }}</h3>
                 <p>Description: {{product.description|linebreaks}}</p>
                 {% if product.discount %}
-                    <div class="card-discount">
-                        <p class="line">{{ product.price }}</p>
-                        <p> {{ product.sell_price }} </p>
+                    <div class="card-discount d-flex gap-2">
+                        <p class="line">$ {{ product.price }}</p>
+                        <p>$ {{ product.sell_price }} </p>
                     </div>
                 {% else %}
-                    <p class="price"> {{ product.price }}</p>
+                    <p class="price">$ {{ product.price }}</p>
                 {% endif %}
-                <a href="#" class="cart-btn">add to cart</a>
+                <a href="#" class="cart-btn d-flex align-items-center justify-content-center">add to cart</a>
             </div>
     </div>
 

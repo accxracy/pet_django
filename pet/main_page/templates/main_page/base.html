@@ -7,7 +7,7 @@
     <title>{% block title %} {% endblock title %}</title>
 
 
-    <link rel= "stylesheet" href="{% static 'bootstrap/css/bootstrap-grid.min.css' %}">
+    <link rel= "stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     
@@ -16,7 +16,8 @@
 <body>
     <header class="header sticky-top"> 
         <div class="header-container d-flex">
-            <navbar class="header-nav pt-4">
+            <nav class="header-nav pt-4">
+
                 <ul class="header-list d-flex">
                     <li>
                         <a href="/" class="nav-a m-3">Home</a>
@@ -27,10 +28,7 @@
                     </li>
                 </ul>
 
-            </navbar>
-            <div class="header-logo">
-                <a href="/"><img src="{% static "img/logo.jpg" %}" alt="" clas="logo"></a>
-            </div>
+            </nav>
             <div class="header-profile">
                 <a href="#" class="m-3">Log in</a>
             </div>
@@ -44,9 +42,6 @@
     </div>
 
     
-
-
-
 
 
 
