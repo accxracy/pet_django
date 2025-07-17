@@ -1,6 +1,3 @@
-
-
-
 """
 URL configuration for pet project.
 
@@ -26,9 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_page.urls', namespace='main')),
-    path('cart/', include('cart.urls', namespace='cart'))
-    
-
+    path('cart/', include('cart.urls', namespace='cart'))    
 ]
 
 if settings.DEBUG:
