@@ -30,7 +30,15 @@
 
             </nav>
             <div class="header-profile">
-                <a href="#" class="m-3">Log in</a>
+                <a href="{% url "cart:cart_detail" %}"><img src="{% static "img/cart.svg" %}" class="cart_icon" alt=""></a>
+                <a href="#" class="m-2">Log in</a>
+                <p class="cart_q">
+                    {% with cart_quantity=cart|length %}
+                        {% if cart_quantity >= 0 %}
+                            {{ cart_quantity }}
+                        {% endif %}
+                    {% endwith %}
+                </p>
             </div>
         </div>
 

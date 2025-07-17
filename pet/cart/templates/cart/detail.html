@@ -13,7 +13,7 @@
         </div>
         <div class="cart-cards">
             {% for i in cart %}
-                {% with product=item.product %}
+                {% with product=i.product %}
                     <div class="cart-cart d-flex">
                         <div class="cart-card-img">
                             <img src="{% if product.image %}{{ product.image.url }}{% endif %}" alt="">
@@ -27,13 +27,13 @@
                             </div>
 
                         </div>
-                        <form action="{% url "cart:cart_remove" product_id%}" method="post">
-                            <input type="sudmit" value="remove" class="remove-btn">
+                       <form action="{% url 'cart:cart_remove' i.product_id %}" method="post">
+                            <input type="submit" value="Remove" class="remove-btn">
                             {% csrf_token %}
-                        </form>
+                            </form>
                         <div class="cart-card-price">
                             {% if i.discount %}
-                                <div class="card-discount d-flex gap-2">
+                                <div class="cart-card-discount">
                                     <p class="line">$ {{ i.price }}</p>
                                     <p>$ {{ i.sell_price }}</p>
                                 </div>
@@ -53,12 +53,21 @@
         </div>
         <div class="cart-buttons d-flex gap-3">
             <a href="/shop" class="cart-btn">Continue shopping</a>
-            <a href="#" class="cart-btn">Checkout</a>
+            {% with cart_quantity=cart|length %}
+                {% if cart_quantity > 0 %}
+                    <a href="#" class="cart-btn">Checkout</a>
+                {% endif %}
+            {% endwith %}
+            
 
         </div>
 
 
     </section>
+
+
+
+
 
 
 {% endblock content %}

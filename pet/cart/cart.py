@@ -39,13 +39,26 @@ class Cart:
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
+
         cart = self.cart.copy()
+
         for product in products:
-            cart[str(product.id)]['product'] = product
-        for item in cart.values():
+            item = cart[str(product.id)]
+            item['product'] = product
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
+            item['product_id'] = product.id
+
+            if product.discount and product.discount > 0:
+                item['discount'] = product.discount
+                item['sell_price'] = format(item['price'] * (1 - product.discount / 100), '.2f')
+            else:
+                item['discount'] = 0
+                item['sell_price'] = item['price']
+
             yield item
+
+
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
@@ -56,4 +69,10 @@ class Cart:
         self.save()
 
     def get_total_price(self):
-        return sum([Decimal(item['price']) * item['quantity'] for item in self.cart.values()])
+        return format(
+        sum(
+        (Decimal(item['price']) * (1 - Decimal(item['product'].discount) / 100)) * item['quantity']
+        for item in self.cart.values()
+        ),
+        '.2f'
+)
