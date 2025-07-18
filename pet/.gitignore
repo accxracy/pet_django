@@ -21,7 +21,7 @@ media/
 .vscode/
 
 
-
+.idea
 
 *.swp
 
