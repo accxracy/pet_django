@@ -1,0 +1,75 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block title %}order page{% endblock title %}
+
+
+{% block content %}
+    <div class="forcreate">
+        <div class="profile bg-white p-4 mb-4 mx-2">
+            <h2 class="mb-2">Created Order</h2>
+            <form action="" method="post" class="order_form">
+                {% csrf_token %}
+
+                <div class="col-md-12 mb-3">
+                    <label for="id_first_name" class="form-label">First name</label>
+                    <input type="text" class="form-control form-styleprofile" id="id_first_name"
+                    name="first_name" placeholder="input your first name" value="{{ form.first_name.value|default:'' }}" required>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label for="id_last_name" class="form-label"> Last name</label>
+                    <input type="text" class="form-control form-styleprofile" id="id_last_name"
+                    name="last_name" placeholder="input your last name" value="{{ form.last_name.value|default:'' }}" required>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label for="id_email" class="form-label">Email</label>
+                    <input type="text" class="form-control form-styleprofile" id="id_email"
+                    name="email" placeholder="input email" value="{{ form.email.value|default:'' }}" required>
+                </div>
+
+
+
+                <div class="col-md-12 mb-3">
+                    <label for="id_address" class="form-label">Address</label>
+                    <input type="text" class="form-control form-styleprofile" id="id_address"
+                    name="address" placeholder="input address" value="{{ form.address.value|default:'' }}" required>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label for="id_postal_code" class="form-label">Postal_code</label>
+                    <input type="text" class="form-control form-styleprofile" id="id_postal_code"
+                    name="postal_code" placeholder="input postal code" value="{{ form.postal_code.value|default:'' }}" required>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label for="id_city" class="form-label">City</label>
+                    <input type="text" class="form-control form-styleprofile" id="id_city"
+                    name="city" placeholder="input city" value="{{ form.city.value|default:'' }}" required>
+                </div>
+
+                <p><input type="submit" value="place order"></p>
+                {% csrf_token %}
+            </form>
+        </div>
+        <div class="checkout">
+            <h1>Checkout</h1>
+            <div class="order-info">
+                {% for item in cart %}
+                    <li>
+                        {{ item.quantity }} x {{ item.product.name }}
+                        <p>$ {{ item.total_price }}</p>
+                    </li>
+                    <p>Total: $ {{ cart.get_total_price  }}</p>
+                
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+
+
+{% endblock content %}
