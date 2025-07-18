@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main_page.apps.MainPageConfig',
     'cart',
     'login',
+    'orders',
 ]
 
 MIDDLEWARE = [
