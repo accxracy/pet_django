@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from orders.models import Order
-from main_page.models import Products
+from main_page.models import Product
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -24,11 +24,11 @@ def stripe_webhook(request):
         session = event.data.object
         if session.mode == 'payment' and session.payment_status == 'paid':
             try:
-                order = Order.objects.get(id=session.client_refernce_id)
+                order = Order.objects.get(id=session.client_reference_id)
             except Order.DoesNotExist:
                 return HttpResponse(status=404)
             order.paid = True
             order.stripe_id = session.payment_intent
             order.save()
-            
+
     return HttpResponse(status=200)

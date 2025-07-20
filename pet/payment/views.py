@@ -14,11 +14,11 @@ def payment_process(request):
     order_id = request.session.get('order_id', None)
     order = get_object_or_404(Order, id=order_id)
     if request.method == 'POST':
-        success_url = request.build_absolute_url(
+        success_url = request.build_absolute_uri(
             reverse('payment:completed')
         )
 
-        cancel_url = request.build_absolute_url(
+        cancel_url = request.build_absolute_uri(
             reverse('payment:canceled')
         )
 
@@ -47,7 +47,7 @@ def payment_process(request):
         session = stripe.checkout.Session.create(**session_data)
         return redirect(session.url, code=303)
     else:
-        return render(request, 'payment/process.htlm', locals())
+        return render(request, 'payment/process.html', locals())
     
 
 def payment_completed(request):

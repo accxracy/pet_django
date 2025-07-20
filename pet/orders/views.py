@@ -12,7 +12,7 @@ def order_create(request):
         if form.is_valid():
             order = form.save()
             for item in cart:
-                discounted_price = item['poduct'].sell_price()
+                discounted_price = item['product'].sell_price()
                 OrderItem.objects.create(order=order,
                                          product=item['product'],
                                          price=discounted_price,
