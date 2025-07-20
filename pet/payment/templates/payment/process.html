@@ -4,6 +4,10 @@
 
 {% block title %}Payment Process{% endblock title%}
 
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+
 
 {% block content %}
     <div class="window">
@@ -48,7 +52,7 @@
                     {% csrf_token %}
                 </form>
             </div>
-            
+
 
         </div>
     </div>
