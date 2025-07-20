@@ -19,7 +19,7 @@ def login(request):
             
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('main:product'))
+                return HttpResponseRedirect(reverse('main_page:popular_list'))
             
     else:
         form = UserLoginForm
@@ -38,6 +38,8 @@ def register(request):
                 request, f'{user.username}, Successful Registration'
             )
             return HttpResponseRedirect(reverse('user:login'))
+        else:
+            print(form.errors) 
     else:
         form = UserRegistartionForm()
     return render(request, 'login/registration.html', {'form': form})
